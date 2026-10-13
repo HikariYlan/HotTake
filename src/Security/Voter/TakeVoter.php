@@ -2,12 +2,12 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\PostIt;
+use App\Entity\Take;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-final class PostItVoter extends Voter
+final class TakeVoter extends Voter
 {
     public const EDIT = 'edit';
     public const VIEW = 'view';
@@ -17,7 +17,7 @@ final class PostItVoter extends Voter
     protected function supports(string $attribute, mixed $subject): bool
     {
         return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::OWNER])
-            && $subject instanceof PostIt;
+            && $subject instanceof Take;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -34,9 +34,9 @@ final class PostItVoter extends Voter
         };
     }
 
-    protected function isOwner(PostIt $postIt, User $user): bool
+    protected function isOwner(Take $take, User $user): bool
     {
-        if (!$user === $postIt->getOwner() || !in_array('ROLE_ADMIN', $user->getRoles())) {
+        if (!$user === $take->getOwner() || !in_array('ROLE_ADMIN', $user->getRoles())) {
             return false;
         }
 

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\PostItRepository;
+use App\Repository\TakeRepository;
 use App\Repository\UserRepository;
 use App\Service\SteamAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class GameController extends AbstractController
 {
     #[Route('/games', name: 'app_game')]
-    public function index(SteamAPI $steamAPI, UserRepository $userRepository, PostItRepository $postItRepository): Response
+    public function index(SteamAPI $steamAPI, UserRepository $userRepository, TakeRepository $takeRepository): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -21,7 +21,7 @@ final class GameController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        $requiredTasks = $user->getRequiredTasks();
+        $takesRequired = $user->getTakesRequired();
 
         $currentUserSteamID = $user->getSteamID() ?? 'not_found';
         if ('not_found' != $currentUserSteamID) {
@@ -33,34 +33,34 @@ final class GameController extends AbstractController
             $games = $avatar = $username = null;
         }
 
-        $tasks_finished = $postItRepository->getFinishedPostitsFromUser($user->getId());
+        $takesFinished = $takeRepository->getFinishedTakesFromUser($user->getId());
 
         return $this->render('game/index.html.twig', [
             'games' => $games,
             'avatar' => $avatar,
             'username' => $username,
-            'task_finished' => $tasks_finished,
-            'tasks_required' => $requiredTasks,
+            'takesFinished' => $takesFinished,
+            'takesRequired' => $takesRequired,
         ]);
     }
 
     #[Route('/games/random', name: 'app_game_random')]
-    public function randomGame(SteamAPI $steamAPI, PostItRepository $postItRepository): Response
+    public function randomGame(SteamAPI $steamAPI, TakeRepository $takeRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
-        $tasks_finished = $postItRepository->getFinishedPostitsFromUser($user->getId());
+        $takesFinished = $takeRepository->getFinishedTakesFromUser($user->getId());
         $finished = false;
-        foreach ($tasks_finished as $postIt) {
-            if ($postIt->getFinishDate()->format('Y-m-d') == (new \DateTime('now'))->format('Y-m-d')) {
+        foreach ($takesFinished as $take) {
+            if ($take->getFinishDate()->format('Y-m-d') == (new \DateTime('now'))->format('Y-m-d')) {
                 $finished = true;
                 break;
             }
         }
 
         if (!$finished) {
-            return $this->redirectToRoute('app_post_it_random');
+            return $this->redirectToRoute('app_take_random');
         }
 
         $currentUserSteamID = $user->getSteamID() ?? 'not_found';

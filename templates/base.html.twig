@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}TODOs PostIts!{% endblock %}</title>
+        <title>{% block title %}Hot Take{% endblock %}</title>
         <link rel="icon" href="{{ asset("/images/icon.svg") }}">
         <link href="{{ asset('output.css') }}" rel="stylesheet">
         {% block stylesheets %}
@@ -38,20 +38,20 @@
                             {{ app.user.username }}
                         </a>
                         <a href="{{ path('app_sticky_board') }}" class="text-white hover:text-yellow-200 transition-colors duration-200 flex items-center">
-                            <i class="fa-regular fa-house me-1"></i> Post-Its Board
+                            <i class="fa-regular fa-house me-1"></i> Sticky Board
                         </a>
 
                         <div class="relative group">
                             <button class="text-white hover:text-yellow-200 transition-colors duration-200 flex items-center cursor-pointer">
-                                <i class="fa-regular fa-note-sticky me-1"></i> PostIts
+                                <i class="fa-regular fa-note-sticky me-1"></i> Takes
                                 <i class="fas fa-chevron-down ml-1 text-xs"></i>
                             </button>
                             <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                                <a href="{{ path('app_post_it_create') }}" class="flex items-center px-4 py-3 text-gray-800 hover:bg-yellow-100 rounded-t-lg transition-colors">
-                                    <i class="fa-solid fa-plus text-green-600 me-2 w-5"></i> Stick a new Post-It!
+                                <a href="{{ path('app_take_create') }}" class="flex items-center px-4 py-3 text-gray-800 hover:bg-yellow-100 rounded-t-lg transition-colors">
+                                    <i class="fa-solid fa-plus text-green-600 me-2 w-5"></i> Stick a new Take!
                                 </a>
-                                <a href="{{ path('app_post_it_random') }}" class="flex items-center px-4 py-3 text-gray-800 hover:bg-yellow-100 rounded-b-lg transition-colors">
-                                    <i class="fa-solid fa-shuffle text-purple-600 me-2 w-5"></i> Pick a random Post-It!
+                                <a href="{{ path('app_take_random') }}" class="flex items-center px-4 py-3 text-gray-800 hover:bg-yellow-100 rounded-b-lg transition-colors">
+                                    <i class="fa-solid fa-shuffle text-purple-600 me-2 w-5"></i> Pick a random Take!
                                 </a>
                             </div>
                         </div>

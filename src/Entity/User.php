@@ -40,16 +40,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     /**
-     * @var Collection<int, PostIt>
+     * @var Collection<int, Take>
      */
-    #[ORM\OneToMany(targetEntity: PostIt::class, mappedBy: 'owner', orphanRemoval: true)]
-    private Collection $postits;
+    #[ORM\OneToMany(targetEntity: Take::class, mappedBy: 'owner', orphanRemoval: true)]
+    private Collection $takes;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $steamID = null;
 
     #[ORM\Column]
-    private int $requiredTasks = 1;
+    private int $takesRequired = 1;
 
     #[ORM\Column(type: Types::BLOB, nullable: true)]
     private mixed $avatar = null;
@@ -78,7 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->postits = new ArrayCollection();
+        $this->takes = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
@@ -164,29 +164,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, PostIt>
+     * @return Collection<int, Take>
      */
-    public function getPostits(): Collection
+    public function getTakes(): Collection
     {
-        return $this->postits;
+        return $this->takes;
     }
 
-    public function addPostit(PostIt $postit): static
+    public function addTake(Take $take): static
     {
-        if (!$this->postits->contains($postit)) {
-            $this->postits->add($postit);
-            $postit->setOwner($this);
+        if (!$this->takes->contains($take)) {
+            $this->takes->add($take);
+            $take->setOwner($this);
         }
 
         return $this;
     }
 
-    public function removePostit(PostIt $postit): static
+    public function removeTake(Take $take): static
     {
-        if ($this->postits->removeElement($postit)) {
+        if ($this->takes->removeElement($take)) {
             // set the owning side to null (unless already changed)
-            if ($postit->getOwner() === $this) {
-                $postit->setOwner(null);
+            if ($take->getOwner() === $this) {
+                $take->setOwner(null);
             }
         }
 
@@ -205,14 +205,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRequiredTasks(): int
+    public function getTakesRequired(): int
     {
-        return $this->requiredTasks;
+        return $this->takesRequired;
     }
 
-    public function setRequiredTasks(int $requiredTasks): static
+    public function setTakesRequired(int $takesRequired): static
     {
-        $this->requiredTasks = $requiredTasks;
+        $this->takesRequired = $takesRequired;
 
         return $this;
     }

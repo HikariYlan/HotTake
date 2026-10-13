@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use App\Enum\Status;
-use App\Repository\PostItRepository;
+use App\Repository\TakeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Timestampable;
 
-#[ORM\Entity(repositoryClass: PostItRepository::class)]
-class PostIt
+#[ORM\Entity(repositoryClass: TakeRepository::class)]
+class Take
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -36,14 +36,14 @@ class PostIt
     #[ORM\Column(type: 'string', enumType: Status::class)]
     private Status $status;
 
-    #[ORM\ManyToOne(inversedBy: 'postits')]
+    #[ORM\ManyToOne(inversedBy: 'takes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
     /**
      * @var Collection<int, Tag>
      */
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'postIts')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'takes')]
     private Collection $tags;
 
     public function __construct()

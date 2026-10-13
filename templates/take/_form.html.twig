@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TODOs PostIt! - {{ submit_label }}{% endblock %}
+{% block title %}Hot Take - {{ submit_label }}{% endblock %}
 
 {% block body %}
     <div class="min-h-[80vh] flex items-center justify-center">
@@ -17,8 +17,8 @@
                             {% endif %}
                         </div>
                     </div>
-                    <h1 class="text-2xl font-bold text-white">{% if 'Edit' in submit_label %}Edit Your Post-It{% else %}Create a New Post-It{% endif %}</h1>
-                    <p class="text-white text-opacity-90 text-sm mt-1">{% if 'Edit' in submit_label %}Update your task information{% else %}Add a new task to your sticky notes board{% endif %}</p>
+                    <h1 class="text-2xl font-bold text-white">{% if 'Edit' in submit_label %}Edit your Take{% else %}Create a new Take{% endif %}</h1>
+                    <p class="text-white text-opacity-90 text-sm mt-1">{% if 'Edit' in submit_label %}Update your take information{% else %}Add a new take to your sticky notes board{% endif %}</p>
                 </div>
 
                 <div class="p-8">

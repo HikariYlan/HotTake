@@ -1,7 +1,7 @@
 {
-  "name": "todopostit",
+  "name": "hottake",
   "version": "1.0.0",
-  "description": "Organize your tasks with Post-its!",
+  "description": "Organize your life with freshly printed hot takes!",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -12,16 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HikariYlan/todoPostits.git"
+    "url": "git+https://github.com/HikariYlan/HotTake.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/HikariYlan/todoPostits/issues"
+    "url": "https://github.com/HikariYlan/HotTake/issues"
   },
-  "homepage": "https://github.com/HikariYlan/todoPostits#readme",
+  "homepage": "https://github.com/HikariYlan/HotTake#readme",
   "devDependencies": {
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",

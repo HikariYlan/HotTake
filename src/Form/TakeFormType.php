@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\PostIt;
+use App\Entity\Take;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Enum\Status;
@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PostItFormType extends AbstractType
+class TakeFormType extends AbstractType
 {
     public function __construct(
         private readonly Security $security,
@@ -67,7 +67,7 @@ class PostItFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => PostIt::class,
+            'data_class' => Take::class,
         ]);
     }
 }

@@ -2,15 +2,15 @@
 
 namespace App\Factory;
 
-use App\Entity\PostIt;
+use App\Entity\Take;
 use App\Enum\Status;
 use Zenstruck\Foundry\LazyValue;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<PostIt>
+ * @extends PersistentProxyObjectFactory<Take>
  */
-final class PostItFactory extends PersistentProxyObjectFactory
+final class TakeFactory extends PersistentProxyObjectFactory
 {
     public function __construct()
     {
@@ -18,7 +18,7 @@ final class PostItFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return PostIt::class;
+        return Take::class;
     }
 
     protected function defaults(): array|callable
@@ -32,9 +32,9 @@ final class PostItFactory extends PersistentProxyObjectFactory
 
     protected function initialize(): static
     {
-        return $this->afterInstantiate(function (PostIt $postIt): void {
-            if (Status::FINISHED == $postIt->getStatus()) {
-                $postIt->setFinishDate(new \DateTime('+2 days'));
+        return $this->afterInstantiate(function (Take $take): void {
+            if (Status::FINISHED == $take->getStatus()) {
+                $take->setFinishDate(new \DateTime('+2 days'));
             }
         })
         ;

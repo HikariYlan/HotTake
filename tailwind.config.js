@@ -23,10 +23,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'post-it-yellow': '#FFEB3B',
-        'post-it-green': '#C8E6C9',
-        'post-it-blue': '#BBDEFB',
-        'post-it-pink': '#F8BBD0',
+        'take-yellow': '#FFEB3B',
+        'take-green': '#C8E6C9',
+        'take-blue': '#BBDEFB',
+        'take-pink': '#F8BBD0',
         'sticky': '#8B7355',
       }
     },

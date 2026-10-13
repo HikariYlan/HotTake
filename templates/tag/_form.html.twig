@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TODOs PostIt! - {{ submit_label }}{% endblock %}
+{% block title %}Hot Take - {{ submit_label }}{% endblock %}
 
 {% block body %}
 <div class="min-h-[80vh] flex items-center justify-center">
@@ -11,7 +11,7 @@
                     <i class="fas fa-tags fa-4x text-white"></i>
                 </div>
                 <h1 class="text-2xl font-bold text-white">{{ 'Edit' in submit_label ? 'Edit Tag' : 'Create a New Tag' }}</h1>
-                <p class="text-white text-opacity-90 text-sm mt-1">{{ 'Edit' in submit_label ? 'Update your tag information' : 'Add a new tag to organize your post-its' }}</p>
+                <p class="text-white text-opacity-90 text-sm mt-1">{{ 'Edit' in submit_label ? 'Update your tag information' : 'Add a new tag to organize your takes' }}</p>
             </div>
 
             <div class="p-8">

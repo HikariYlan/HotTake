@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TODOs PostIt! - Game Library{% endblock %}
+{% block title %}Hot Take - Game Library{% endblock %}
 
 {% block body %}
 <div class="mb-8 text-center">
@@ -52,7 +52,7 @@
         </div>
     </div>
 {% else %}
-    {% if task_finished|length < tasks_required %}
+    {% if takesFinished|length < takesRequired %}
         <div class="max-w-4xl mx-auto mb-6">
             <div class="bg-amber-50 border-l-4 border-amber-400 rounded-lg p-4 shadow-md">
                 <div class="flex items-center">
@@ -84,19 +84,19 @@
                         <span class="font-bold text-3xl">{{ games|length }}</span> games
                     </p>
                 </div>
-                <a href="{{ path(task_finished ? 'app_game_random' : 'app_post_it_random') }}" class="inline-flex items-center px-8 py-4 bg-white text-cyan-600 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105">
-                    {% if task_finished|length >= tasks_required %}
+                <a href="{{ path(takesFinished ? 'app_game_random' : 'app_take_random') }}" class="inline-flex items-center px-8 py-4 bg-white text-cyan-600 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-105">
+                    {% if takesFinished|length >= takesRequired %}
                         <i class="fa-solid fa-rocket fa-xl me-1"></i>
                     {% else %}
                         <i class="fa-solid fa-clipboard-question fa-xl me-1"></i>
                     {% endif %}
-                    {{ task_finished|length >= tasks_required ? 'Pick a random game!' : 'Pick a random task!' }}
+                    {{ takesFinished|length >= takesRequired ? 'Pick a random game!' : 'Pick a random task!' }}
                 </a>
             </div>
         </div>
     </div>
 
-    {% if task_finished|length >= tasks_required %}
+    {% if takesFinished|length >= takesFinished %}
     <div class="mb-8 text-center">
         <h1 class="text-2xl font-bold text-gray-800 mb-2">Want to play a particular game?</h1>
         <p class="text-gray-600">You can click on any card below to directly launch the game!</p>
@@ -104,7 +104,7 @@
     {% endif %}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {% for game in games|sort((a, b) => a.playtime_forever < b.playtime_forever) %}
-            {{ include('game/_show.html.twig', {game: game, task_finished: task_finished, tasks_required: tasks_required}) }}
+            {{ include('game/_show.html.twig', {game: game, takesFinished: takesFinished, takesRequired: takesRequired}) }}
         {% endfor %}
     </div>
 {% endif %}

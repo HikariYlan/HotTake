@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TODOs PostIt! - User Settings{% endblock %}
+{% block title %}Hot Take - User Settings{% endblock %}
 
 {% block body %}
 
@@ -129,14 +129,14 @@
                         <i class="fas fa-check-circle mr-2 text-green-500"></i>
                         Number of required tasks to unlock the game picker reward
                     </label>
-                    {{ form_widget(form.requiredTasks, {
+                    {{ form_widget(form.takesRequired, {
                         'attr': {
                             'class': 'w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200'
                         }
                     }) }}
-                    {% if form_errors(form.requiredTasks) %}
+                    {% if form_errors(form.takesRequired) %}
                         <div class="mt-2 text-red-600 text-sm">
-                            {{ form_errors(form.requiredTasks) }}
+                            {{ form_errors(form.TakesRequired) }}
                         </div>
                     {% endif %}
                 </div>

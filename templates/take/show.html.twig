@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TODOs PostIt! - Post-It #{{ postIt ? postIt.id : 0 }}{% endblock %}
+{% block title %}Hot Take - Take #{{ take ? take.id : 0 }}{% endblock %}
 
 {% block body %}
     <div class="max-w-3xl mx-auto">
-        {% if postIt is null %}
+        {% if take is null %}
             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
                 <div class="p-8 text-center">
                     <i class="fas fa-exclamation-triangle fa-6x mx-auto mb-4 text-red-500"></i>
-                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Post-It Not Found</h1>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">That was a bad Take :(</h1>
                     <p class="text-gray-600 text-lg mb-6">
-                        This post-it might have been deleted or never existed.<br>
-                        Check your sticky notes board for all available post-its.
+                        This Take might have been deleted or never existed.<br>
+                        Check your sticky notes board for all available takes.
                     </p>
                     <a href="{{ path('app_sticky_board') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold rounded-lg shadow-lg hover:from-teal-600 hover:to-cyan-600 transition-all duration-200 transform hover:scale-105">
                         <i class="fas fa-arrow-left mr-2"></i>
@@ -22,13 +22,13 @@
         {% else %}
             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
                 <div class="bg-gradient-to-r
-                    {% if postIt.status.value == 'PENDING' %}
+                    {% if take.status.value == 'PENDING' %}
                         from-gray-400 to-gray-500
-                    {% elseif postIt.status.value == 'TO DO' %}
+                    {% elseif take.status.value == 'TO DO' %}
                         from-blue-400 to-blue-500
-                    {% elseif postIt.status.value == 'ON GOING' %}
+                    {% elseif take.status.value == 'ON GOING' %}
                         from-orange-400 to-orange-500
-                    {% elseif postIt.status.value == 'FINISHED' %}
+                    {% elseif take.status.value == 'FINISHED' %}
                         from-green-400 to-green-500
                     {% else %}
                         from-teal-500 to-cyan-500
@@ -36,7 +36,7 @@
                     p-6">
                     <h1 class="text-3xl font-bold text-white flex items-center">
                         <i class="fas fa-sticky-note mr-3"></i>
-                        {{ postIt.title }}
+                        {{ take.title }}
                     </h1>
                 </div>
 
@@ -47,7 +47,7 @@
                         </div>
                         <div class="flex-1">
                             <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Description</h3>
-                            <p class="text-lg text-gray-800">{{ postIt.description ? postIt.description : "No description" }}</p>
+                            <p class="text-lg text-gray-800">{{ take.description ? take.description : "No description" }}</p>
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
                                 <i class="fas fa-clock mr-2 text-gray-600"></i>
                                 <span class="text-sm font-semibold text-gray-600 uppercase">Created</span>
                             </div>
-                            <p class="text-lg font-medium text-gray-800">{{ postIt.creationDate|date('d/m/Y, H:i') }}</p>
+                            <p class="text-lg font-medium text-gray-800">{{ take.creationDate|date('d/m/Y, H:i') }}</p>
                         </div>
 
                         <div class="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-400">
@@ -65,7 +65,7 @@
                                 <i class="fas fa-calendar-alt mr-2 text-orange-600"></i>
                                 <span class="text-sm font-semibold text-orange-600 uppercase">Due Date</span>
                             </div>
-                            <p class="text-lg font-medium text-gray-800">{{ postIt.dueDate ? postIt.dueDate|date('d/m/Y') : "No due date" }}</p>
+                            <p class="text-lg font-medium text-gray-800">{{ take.dueDate ? take.dueDate|date('d/m/Y') : "No due date" }}</p>
                         </div>
 
                         <div class="bg-green-50 rounded-lg p-4 border-l-4 border-green-400">
@@ -73,7 +73,7 @@
                                 <i class="fas fa-check-circle mr-2 text-green-600"></i>
                                 <span class="text-sm font-semibold text-green-600 uppercase">Finish Date</span>
                             </div>
-                            <p class="text-lg font-medium text-gray-800">{{ postIt.finishDate ? postIt.finishDate|date('d/m/Y') : "Not finished yet" }}</p>
+                            <p class="text-lg font-medium text-gray-800">{{ take.finishDate ? take.finishDate|date('d/m/Y') : "Not finished yet" }}</p>
                         </div>
 
                         <div class="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-400">
@@ -81,18 +81,18 @@
                                 <i class="fas fa-bolt mr-2 text-purple-600"></i>
                                 <span class="text-sm font-semibold text-purple-600 uppercase">Status</span>
                             </div>
-                            <p class="text-lg font-medium text-gray-800">{{ postIt.status.value }}</p>
+                            <p class="text-lg font-medium text-gray-800">{{ take.status.value }}</p>
                         </div>
                     </div>
 
-                    {% if postIt.tags|length > 0 %}
+                    {% if take.tags|length > 0 %}
                     <div class="bg-yellow-50 rounded-lg p-4 border-l-4 border-yellow-400">
                         <div class="flex items-center mb-3">
                             <i class="fas fa-tags mr-2 text-yellow-600"></i>
                             <span class="text-sm font-semibold text-yellow-600 uppercase">Tags</span>
                         </div>
                         <div class="flex flex-wrap gap-2">
-                            {% for tag in postIt.tags %}
+                            {% for tag in take.tags %}
                                 <span class="inline-flex items-center px-3 py-1 bg-{{ tag.color }}-500 border-2 border-{{ tag.color }}-600 text-white rounded-full text-sm font-medium">
                                     {{ tag.name }}
                                 </span>
@@ -102,22 +102,22 @@
                     {% endif %}
 
                     <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                        {% if not postIt.finishDate %}
-                            {{ include('post_it/finish.html.twig') }}
+                        {% if not take.finishDate %}
+                            {{ include('take/finish.html.twig') }}
                         {% endif %}
-                        <a href="{{ path('app_post_it_edit', {id: postIt.id}) }}" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105">
+                        <a href="{{ path('app_take_edit', {id: take.id}) }}" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105">
                             <i class="fas fa-edit mr-2"></i>
-                            Edit Post-It
+                            Edit take
                         </a>
-                        {{ include('post_it/delete.html.twig') }}
+                        {{ include('take/delete.html.twig') }}
                         <a href="{{ path('app_sticky_board') }}" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r
-                            {% if postIt.status.value == 'PENDING' %}
+                            {% if take.status.value == 'PENDING' %}
                                 from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600
-                            {% elseif postIt.status.value == 'TO DO' %}
+                            {% elseif take.status.value == 'TO DO' %}
                                 from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600
-                            {% elseif postIt.status.value == 'ON GOING' %}
+                            {% elseif take.status.value == 'ON GOING' %}
                                 from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600
-                            {% elseif postIt.status.value == 'FINISHED' %}
+                            {% elseif take.status.value == 'FINISHED' %}
                                 from-green-400 to-green-500 hover:from-green-500 hover:to-green-600
                             {% else %}
                                 from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600

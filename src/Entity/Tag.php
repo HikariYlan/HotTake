@@ -19,10 +19,10 @@ class Tag
     private ?string $name = null;
 
     /**
-     * @var Collection<int, PostIt>
+     * @var Collection<int, Take>
      */
-    #[ORM\ManyToMany(targetEntity: PostIt::class, mappedBy: 'tags')]
-    private Collection $postIts;
+    #[ORM\ManyToMany(targetEntity: Take::class, mappedBy: 'tags')]
+    private Collection $takes;
 
     #[ORM\ManyToOne(inversedBy: 'tags')]
     #[ORM\JoinColumn(nullable: false)]
@@ -33,7 +33,7 @@ class Tag
 
     public function __construct()
     {
-        $this->postIts = new ArrayCollection();
+        $this->takes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,27 +54,27 @@ class Tag
     }
 
     /**
-     * @return Collection<int, PostIt>
+     * @return Collection<int, Take>
      */
-    public function getPostIts(): Collection
+    public function getTakes(): Collection
     {
-        return $this->postIts;
+        return $this->takes;
     }
 
-    public function addPostIt(PostIt $postIt): static
+    public function addTake(Take $take): static
     {
-        if (!$this->postIts->contains($postIt)) {
-            $this->postIts->add($postIt);
-            $postIt->addTag($this);
+        if (!$this->takes->contains($take)) {
+            $this->takes->add($take);
+            $take->addTag($this);
         }
 
         return $this;
     }
 
-    public function removePostIt(PostIt $postIt): static
+    public function removeTake(Take $take): static
     {
-        if ($this->postIts->removeElement($postIt)) {
-            $postIt->removeTag($this);
+        if ($this->takes->removeElement($take)) {
+            $take->removeTag($this);
         }
 
         return $this;

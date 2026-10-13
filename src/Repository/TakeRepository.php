@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\PostIt;
+use App\Entity\Take;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<PostIt>
+ * @extends ServiceEntityRepository<Take>
  */
-class PostItRepository extends ServiceEntityRepository
+class TakeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PostIt::class);
+        parent::__construct($registry, Take::class);
     }
 
-    public function getPostitsFromUser(mixed $userId): mixed
+    public function getTakesFromUser(mixed $userId): mixed
     {
         return $this->createQueryBuilder('p')
             ->where('p.owner = :userId')
@@ -25,7 +25,7 @@ class PostItRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getUnfinishedPostitsFromUser(mixed $userId): mixed
+    public function getUnfinishedTakesFromUser(mixed $userId): mixed
     {
         return $this->createQueryBuilder('p')
             ->where('p.owner = :userId')
@@ -35,7 +35,7 @@ class PostItRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getFinishedPostitsFromUser(mixed $userId): mixed
+    public function getFinishedTakesFromUser(mixed $userId): mixed
     {
         $from = (new \DateTime())->setTime(0, 0, 0);
         $to = (new \DateTime())->setTime(23, 59, 59);

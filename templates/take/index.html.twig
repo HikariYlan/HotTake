@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TODOs PostIt! - Sticky Notes Board{% endblock %}
+{% block title %}Hot Take - Sticky Notes Board{% endblock %}
 
 {% block body %}
 
 <div class="mb-8 text-center">
     <h1 class="text-4xl font-bold text-gray-800 mb-2 flex items-center justify-center">
         <i class="fa-solid fa-note-sticky mr-3"></i>
-        My Post-Its Board
+        My Sticky Board
     </h1>
-    <p class="text-gray-600">Organize your tasks with style</p>
+    <p class="text-gray-600">Organize your life with style</p>
 </div>
 
 {% if pending is empty and toDo is empty and onGoing is empty and finished is empty %}
@@ -17,13 +17,13 @@
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
             <div class="p-12 text-center">
                 <i class="fa-solid fa-note-sticky fa-7x text-gray-300"></i>
-                <h2 class="text-3xl font-bold text-gray-800 mb-3">No Post-Its Yet!</h2>
+                <h2 class="text-3xl font-bold text-gray-800 mb-3">No Takes Yet!</h2>
                 <p class="text-gray-600 text-lg mb-8">
-                    Your board is empty. Start organizing your tasks by creating your first Post-It!
+                    Your board is empty. Start organizing your tasks by creating your first Take!
                 </p>
-                <a href="{{ path('app_post_it_create') }}" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-lg rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-200 transform hover:scale-105">
+                <a href="{{ path('app_take_create') }}" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-lg rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-200 transform hover:scale-105">
                     <i class="fas fa-plus mr-2"></i>
-                    Stick a new Post-It!
+                    Stick a new Take!
                 </a>
             </div>
         </div>
@@ -38,7 +38,7 @@
         </div>
         <h2 class="text-2xl font-bold text-center text-gray-700 mb-4">PENDING</h2>
         <div class="space-y-3 min-h-[100px]" data-controller="sortable" data-sortable-status-value="PENDING">
-            {{ include('post_it/_show.html.twig', {postIts: pending, status: 'pending'}) }}
+            {{ include('take/_show.html.twig', {takes: pending, status: 'pending'}) }}
         </div>
     </div>
 
@@ -50,7 +50,7 @@
         </div>
         <h2 class="text-2xl font-bold text-center text-blue-700 mb-4">TO DO</h2>
         <div class="space-y-3 min-h-[100px]" data-controller="sortable" data-sortable-status-value="TO DO">
-            {{ include('post_it/_show.html.twig', {postIts: toDo, status: 'todo'}) }}
+            {{ include('take/_show.html.twig', {takes: toDo, status: 'todo'}) }}
         </div>
     </div>
 
@@ -62,7 +62,7 @@
         </div>
         <h2 class="text-2xl font-bold text-center text-orange-700 mb-4">ON GOING</h2>
         <div class="space-y-3 min-h-[100px]" data-controller="sortable" data-sortable-status-value="ON GOING">
-            {{ include('post_it/_show.html.twig', {postIts: onGoing, status: 'ongoing'}) }}
+            {{ include('take/_show.html.twig', {takes: onGoing, status: 'ongoing'}) }}
         </div>
     </div>
 
@@ -74,7 +74,7 @@
         </div>
         <h2 class="text-2xl font-bold text-center text-green-700 mb-4">FINISHED</h2>
         <div class="space-y-3 min-h-[100px]" data-controller="sortable" data-sortable-status-value="FINISHED">
-            {{ include('post_it/_show.html.twig', {postIts: finished, status: 'finished'}) }}
+            {{ include('take/_show.html.twig', {takes: finished, status: 'finished'}) }}
         </div>
     </div>
 </div>

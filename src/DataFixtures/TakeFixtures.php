@@ -2,18 +2,18 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\PostItFactory;
+use App\Factory\TakeFactory;
 use App\Factory\UserFactory;
 use App\Story\UserStory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class PostItFixtures extends Fixture implements DependentFixtureInterface
+class TakeFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        PostItFactory::createMany(50, function () {
+        TakeFactory::createMany(50, function () {
             if (1 == random_int(0, 1)) {
                 $dueDate = new \DateTime('+20 days');
             }

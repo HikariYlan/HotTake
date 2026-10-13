@@ -1,4 +1,4 @@
-# / / / / / TODOs Post-its! \ \ \ \ \ 
+# / / / / / Hot Take \ \ \ \ \ 
 ## Author: Hikari / Ylan
 
 ### How to install
@@ -17,8 +17,8 @@ The following script will automatically fetch the project and install it for you
 Simply open a terminal at the desired location on you computer and paste the script.
 
 ```shell
-git clone https://github.com/HikariYlan/todoPostits.git
-cd todoPostits/
+git clone https://github.com/HikariYlan/HotTake.git
+cd HotTake/
 docker compose up -d
 composer install
 npm install
@@ -59,7 +59,7 @@ From there, you can see all of your Post-its!
 
 ### How to use the "Game Reward" functionality
 
-The "Reward yourself with a game!" functionality allows you to launch a game after finishing the configured amount of Post-Its.
+The "Reward yourself with a game!" functionality allows you to launch a game after finishing the configured amount of Takes.
 You can either let the application choose one randomly for you, or you can click on any game card.
 
 In order to use it, you need an API key.

@@ -43,6 +43,7 @@ class SteamController extends AbstractController
             return $this->redirectToRoute('app_sticky_board');
         }
 
+        /** @var User $user */
         $user = $this->getUser();
         $user->setSteamID($steamId);
         $entityManager->flush();
@@ -55,6 +56,7 @@ class SteamController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        /** @var User $user */
         $user = $this->getUser();
         $user->setSteamID(null);
         $entityManager->flush();

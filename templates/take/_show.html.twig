@@ -1,30 +1,30 @@
-{% for postIt in postIts %}
-    <div class="postit-item" data-post-it-id="{{ postIt.id }}">
-        <div class="post-it-card {% if status == 'pending' %}post-it-pending{% elseif status == 'todo' %}post-it-todo{% elseif status == 'ongoing' %}post-it-ongoing{% elseif status == 'finished' %}post-it-finished{% endif %} relative overflow-hidden cursor-pointer"
-             onclick="if(!window.isDragging) { window.location.href='{{ path('app_post_it_details', {id: postIt.id}) }}'; }">
+{% for take in takes %}
+    <div class="take-item" data-take-id="{{ take.id }}">
+        <div class="take-card {% if status == 'pending' %}take-pending{% elseif status == 'todo' %}take-todo{% elseif status == 'ongoing' %}take-ongoing{% elseif status == 'finished' %}take-finished{% endif %} relative overflow-hidden cursor-pointer"
+             onclick="if(!window.isDragging) { window.location.href='{{ path('app_take_details', {id: take.id}) }}'; }">
             <div class="absolute top-0 right-0 w-0 h-0 border-l-[28px] border-l-transparent border-t-[28px] border-t-white shadow-md"></div>
-            <h4 class="text-lg font-bold text-gray-800 mb-2 pr-6">{{ postIt.title }}</h4>
+            <h4 class="text-lg font-bold text-gray-800 mb-2 pr-6">{{ take.title }}</h4>
             <div class="text-sm text-gray-700 space-y-1">
                 <p class="flex items-center">
                     <i class="fas fa-clock mr-1 text-gray-600"></i>
-                    Created: {{ postIt.creationDate|date('d/m/Y, H:i') }}
+                    Created: {{ take.creationDate|date('d/m/Y, H:i') }}
                 </p>
-                {% if postIt.dueDate %}
+                {% if take.dueDate %}
                     <p class="flex items-center text-orange-700 font-semibold">
                         <i class="fas fa-calendar-alt mr-1"></i>
-                        Due: {{ postIt.dueDate|date('d/m/Y') }}
+                        Due: {{ take.dueDate|date('d/m/Y') }}
                     </p>
                 {% endif %}
-                {% if postIt.finishDate %}
+                {% if take.finishDate %}
                     <p class="flex items-center text-green-700 font-semibold">
                         <i class="fas fa-check-circle mr-1"></i>
-                        Finished: {{ postIt.finishDate|date('d/m/Y') }}
+                        Finished: {{ take.finishDate|date('d/m/Y') }}
                     </p>
                 {% endif %}
-                {% if postIt.tags|length > 0 %}
+                {% if take.tags|length > 0 %}
                     <div class="flex flex-wrap gap-1 mt-2">
                         <i class="fa-solid fa-tag text-gray-600"></i>
-                        {% for tag in postIt.tags %}
+                        {% for tag in take.tags %}
                             <span class="inline-flex items-center px-2 py-0.5 bg-{{ tag.color }}-500 border border-{{ tag.color }}-600 text-white rounded-full text-xs font-medium">
                                 {{ tag.name }}
                             </span>
@@ -35,8 +35,8 @@
         </div>
     </div>
 {% endfor %}
-<div class="empty-message text-center py-8 text-gray-500 {% if postIts is not empty %}hidden{% endif %}">
+<div class="empty-message text-center py-8 text-gray-500 {% if takes is not empty %}hidden{% endif %}">
     <i class="fas fa-inbox fa-4x mx-auto mb-2 opacity-50"></i>
-    <p class="text-sm">No post-its</p>
+    <p class="text-sm">No Takes</p>
 </div>
 

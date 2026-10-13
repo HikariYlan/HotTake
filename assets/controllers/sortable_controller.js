@@ -10,7 +10,7 @@ export default class extends Controller {
         this.sortable = new Sortable(this.element, {
             group: 'shared',
             animation: 150,
-            draggable: '.postit-item',
+            draggable: '.take-item',
             ghostClass: 'sortable-ghost',
             chosenClass: 'sortable-chosen',
             dragClass: 'sortable-drag',
@@ -25,10 +25,10 @@ export default class extends Controller {
 
     updateEmptyMessage(container) {
         const emptyMessage = container.querySelector('.empty-message');
-        const hasPostIts = container.querySelectorAll('.postit-item').length > 0;
+        const hasTakes = container.querySelectorAll('.take-item').length > 0;
 
         if (emptyMessage) {
-            if (hasPostIts) {
+            if (hasTakes) {
                 emptyMessage.classList.add('hidden');
             } else {
                 emptyMessage.classList.remove('hidden');
@@ -37,7 +37,7 @@ export default class extends Controller {
     }
 
     async onDragEnd(event) {
-        const postItId = event.item.dataset.postItId;
+        const takeId = event.item.dataset.takeId;
         const newStatus = event.to.dataset.sortableStatusValue;
         const oldStatus = event.from.dataset.sortableStatusValue;
 
@@ -51,7 +51,7 @@ export default class extends Controller {
         }
 
         try {
-            const response = await fetch(`/post_it/${postItId}/update-status`, {
+            const response = await fetch(`/take/${takeId}/update-status`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,14 +63,14 @@ export default class extends Controller {
 
             await response.json();
 
-            const card = event.item.querySelector('.post-it-card');
+            const card = event.item.querySelector('.take-card');
             if (card) {
-                card.classList.remove('post-it-pending', 'post-it-todo', 'post-it-ongoing', 'post-it-finished');
+                card.classList.remove('take-pending', 'take-todo', 'take-ongoing', 'take-finished');
                 const statusMap = {
-                    'PENDING': 'post-it-pending',
-                    'TO DO': 'post-it-todo',
-                    'ON GOING': 'post-it-ongoing',
-                    'FINISHED': 'post-it-finished'
+                    'PENDING': 'take-pending',
+                    'TO DO': 'take-todo',
+                    'ON GOING': 'take-ongoing',
+                    'FINISHED': 'take-finished'
                 };
                 if (statusMap[newStatus]) {
                     card.classList.add(statusMap[newStatus]);

@@ -55,7 +55,7 @@ class UserSettingsFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('requiredTasks', IntegerType::class)
+            ->add('takesRequired', IntegerType::class)
         ;
     }
 
